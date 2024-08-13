@@ -1,15 +1,35 @@
 import java.util.Scanner;
-public class ceaser{
-    public static void main(String[] args) {
-        Scanner sc  = new Scanner(System.in);
-        System.out.println("Enter the string:");
-        String str = sc.nextLine();
-        System.out.println("Enter Key");
-        int key = sc.nextInt();
-        char[] arr = str.toCharArray();
-        for(int i=0;i<arr.length;i++){
-            arr[i]=(char)((int)arr[i]+key);
-            System.out.print(arr[i]);
-        }
-    }
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Enter plaintext:");
+		String str=sc.next();
+		System.out.print("Enter key:");
+		int key=sc.nextInt();
+		String encryptedText=encrypt(str,key);
+		System.out.println(encryptedText);
+		String decryptedText=decrypt(encryptedText,key);
+		System.out.println(decryptedText);
+	}
+	public static String encrypt(String str,int key)
+	{
+	    String ans="";
+	    for(char ch:str.toCharArray())
+	    {
+	        char new_char=(char)((((ch-'a')+key)%26)+'a');
+	        ans+=new_char;
+	    }
+	    return ans;
+	}
+	public static String decrypt(String str,int key)
+	{
+	    String ans="";
+	    for(char ch:str.toCharArray())
+	    {
+	        char new_char=(char)((((ch-'a')+(26-key))%26)+'a');
+	        ans+=new_char;
+	    }
+	    return ans;
+	}
 }
